@@ -1,0 +1,53 @@
+stages:
+  prepare:
+    cmd: python src/stages/prepare.py --config=params.yaml
+    deps:
+    - src/stages/prepare.py
+    - data/init/titanic.zip
+    outs:
+    - data/prepared:
+        cache: false
+  featurize:
+    cmd: python src/stages/featurize.py --config=params.yaml
+    deps:
+    - data/prepared
+    - src/stages/featurize.py
+    outs:
+    - data/featurized:
+        cache: false
+  train:
+    cmd: python src/stages/train.py --config=params.yaml # data/featurized model.pkl
+    deps:
+    - data/featurized
+    - src/stages/featurize.py
+    - src/stages/train.py
+    outs:
+    - models/model.pkl:
+        cache: false
+    params:
+    - train.n_estim
+  evaluate:
+    cmd: python src/stages/evaluate.py --config=params.yaml # model.pkl data/featurized scores.json plots.json
+    deps:
+    - models/model.pkl
+    - src/stages/train.py
+    - src/stages/evaluate.py
+    metrics:
+    - reports/scores.json:
+        cache: false
+plots:
+- reports/cross_val_score.csv:
+    x: fold
+    y: cvs_y
+    title: test
+    x_label: folds
+    y_label: cvs_scroe
+- reports/classes.csv:
+    x: actual
+    y: predict
+    template: confusion
+- reports/cross_val_score_mean.csv:
+    y: cvs_mean
+    y_label: mean
+    title: cross val score mean
+- importance.png

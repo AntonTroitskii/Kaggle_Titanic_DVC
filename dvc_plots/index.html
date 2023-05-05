@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>DVC Plot</title>
+    
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <style>
+        table {
+            border-spacing: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id = "pcp">
+        <script type = "text/javascript">
+            var plotly_data = {"data": [{"type": "parcoords", "dimensions": [{"label": "Experiment", "values": [1, 0], "tickvals": [1, 0], "ticktext": ["workspace", "master"]}]}], "layout": {}};
+            Plotly.newPlot("pcp", plotly_data.data, plotly_data.layout);
+        </script>
+    </div>
+    
+</body>
+</html>

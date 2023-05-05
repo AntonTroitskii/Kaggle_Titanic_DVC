@@ -1,0 +1,49 @@
+base:
+    seed: 42
+    target: Survived
+
+data:
+  # DIRs
+  input: data/init/titanic.zip
+  data_dir: data
+  init_dir: data/init
+  unzip_dir: data/unzip
+  prepared_dir: data/prepared
+  featurize_dir: data/featurized
+  
+  # Files
+  train_name: train.csv
+  test_name: test.csv
+  prep_pred_name: pred.cvs
+  prep_train_name: prep_train.cvs
+  prep_test_name: prep_test.cvs
+  trainpkl: train.pkl
+  testpkl: test.pkl
+
+
+prepare:
+  split: 0.2
+
+train:
+  model_dir: models/
+  model: model.pkl
+  n_estim: 800
+  seed: 42
+
+evaluate:
+  seed: 42
+  n_split: 5
+  reports_dir: reports
+  importance: importance.png
+  plots: plots.json
+  scores: scores.json
+  classes: classes.csv
+  cvs: cross_val_score.csv
+  cvs_mean: cross_val_score_mean.csv
+
+
+
+
+  
+  
+  
