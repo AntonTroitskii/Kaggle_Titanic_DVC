@@ -50,4 +50,4 @@ plots:
     y: cvs_mean
     y_label: mean
     title: cross val score mean
-- importance.png
+- reports/importance.png
