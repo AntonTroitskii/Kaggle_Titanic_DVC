@@ -1,37 +1,37 @@
 stages:
   prepare:
-    cmd: python src/stages/prepare.py --config=params.yaml
+    cmd: python src/prepare.py --config=params.yaml
     deps:
-    - src/stages/prepare.py
+    - src/prepare.py
     - data/init/titanic.zip
     outs:
     - data/prepared:
         cache: false
   featurize:
-    cmd: python src/stages/featurize.py --config=params.yaml
+    cmd: python src/featurize.py --config=params.yaml
     deps:
     - data/prepared
-    - src/stages/featurize.py
+    - src/featurize.py
     outs:
     - data/featurized:
         cache: false
   train:
-    cmd: python src/stages/train.py --config=params.yaml # data/featurized model.pkl
+    cmd: python src/train.py --config=params.yaml # data/featurized model.pkl
     deps:
     - data/featurized
-    - src/stages/featurize.py
-    - src/stages/train.py
+    - src/featurize.py
+    - src/train.py
     outs:
     - models/model.pkl:
         cache: false
     params:
     - train.n_estim
   evaluate:
-    cmd: python src/stages/evaluate.py --config=params.yaml # model.pkl data/featurized scores.json plots.json
+    cmd: python src/evaluate.py --config=params.yaml # model.pkl data/featurized scores.json plots.json
     deps:
     - models/model.pkl
-    - src/stages/train.py
-    - src/stages/evaluate.py
+    - src/train.py
+    - src/evaluate.py
     metrics:
     - reports/scores.json:
         cache: false

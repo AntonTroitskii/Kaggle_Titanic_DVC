@@ -1,6 +1,6 @@
 base:
-    seed: 42
-    target: Survived
+  seed: 42
+  target: Survived
 
 data:
   # DIRs
@@ -10,7 +10,7 @@ data:
   unzip_dir: data/unzip
   prepared_dir: data/prepared
   featurize_dir: data/featurized
-  
+
   # Files
   train_name: train.csv
   test_name: test.csv
@@ -27,7 +27,7 @@ prepare:
 train:
   model_dir: models/
   model: model.pkl
-  n_estim: 800
+  n_estim: 200
   seed: 42
 
 evaluate:
@@ -44,6 +44,5 @@ evaluate:
 
 
 
-  
-  
-  
+
+

@@ -12,7 +12,7 @@ from sklearn.model_selection import cross_val_score, StratifiedShuffleSplit
 from typing import Text
 
 
-from src.utils import pars, files
+from utils import pars, files
 
 
 def evaluate(config_path: Text):

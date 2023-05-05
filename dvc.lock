@@ -44,11 +44,11 @@ stages:
       size: 1109
     params:
       params.yaml:
-        train.n_estim: 800
+        train.n_estim: 200
     outs:
     - path: models/model.pkl
-      md5: 4ec13c429463104732e0cdadd8e2515c
-      size: 15765697
+      md5: 4d3d2c140636ad96b877222fc49e56d2
+      size: 3962799
   evaluate:
     cmd: python src/stages/evaluate.py --config=params.yaml
     deps:
