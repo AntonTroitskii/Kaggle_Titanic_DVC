@@ -1,13 +1,8 @@
 from sklearn.ensemble import RandomForestClassifier
 import pickle
 
-import sys
 from pathlib import Path
 from typing import Text
-
-for i in sys.path:
-    print(i)
-
 from utils import pars, files
 import yaml
 

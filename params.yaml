@@ -27,7 +27,7 @@ prepare:
 train:
   model_dir: models/
   model: model.pkl
-  n_estim: 200
+  n_estim: 100
   seed: 42
 
 evaluate:

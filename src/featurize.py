@@ -42,7 +42,7 @@ pipe_cat = make_pipeline(SimpleImputer(
 
 pipe_transfrom = ColumnTransformer(
     [('num', pipe_age, ['Age', 'Fare']),
-     ('cat', pipe_cat, ['Sex'])
+     ('cat', pipe_cat, ['Sex', 'Embarked', 'Pclass'])
      ]
 )
 
