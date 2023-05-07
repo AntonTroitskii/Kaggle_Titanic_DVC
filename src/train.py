@@ -27,7 +27,12 @@ def train(config_path: Text):
 
     clf = RandomForestClassifier(
         n_estimators=params['train']['n_estim'],
-        random_state=params['train']['seed'])
+        criterion=params['train']['crit'],
+        max_depth=params['train']['max_d'],
+        min_samples_split=params['train']['min_s_s'],
+        min_samples_leaf=params['train']['min_s_l'],
+        random_state=params['train']['seed'],
+        n_jobs=params['train']['n_j'])
 
     clf.fit(X_train, y_train)
 

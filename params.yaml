@@ -28,6 +28,11 @@ train:
   model_dir: models/
   model: model.pkl
   n_estim: 100
+  crit: gini
+  max_d: 1000
+  min_s_s: 2
+  min_s_l: 1
+  n_j: -1
   seed: 42
 
 evaluate:
