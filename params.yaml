@@ -27,7 +27,7 @@ prepare:
 train:
   model_dir: models/
   model: model.pkl
-  n_estim: 100
+  n_estim: 200
   crit: gini
   max_d: 1000
   min_s_s: 2
