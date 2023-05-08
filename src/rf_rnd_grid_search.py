@@ -3,8 +3,7 @@ import subprocess
 import random
 
 random.seed(0)
-
-num_exp = 50
+num_exp = 30
 
 for _ in range(num_exp):
     

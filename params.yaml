@@ -27,9 +27,9 @@ prepare:
 train:
   model_dir: models/
   model: model.pkl
-  n_estim: 200
-  crit: gini
-  max_d: 1000
+  n_estim: 451
+  crit: entropy
+  max_d: 9
   min_s_s: 2
   min_s_l: 1
   n_j: -1
