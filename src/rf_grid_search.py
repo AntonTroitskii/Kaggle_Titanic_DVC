@@ -5,10 +5,10 @@ import subprocess
 # crit_vals = ['gini', 'entropy']
 # max_depth_vals = [5, 10, 15, 20]
 
-n_estim_vals = [50, 60, 70, 80, 100]
-# n_estim_vals = [100, 200, 300, 500, 70]
+# n_estim_vals = [50, 60, 70, 80, 100]
+n_estim_vals = [100, 200, 300, 500, 700, 1000]
 crit_vals = ['gini', 'entropy']
-max_depth_vals = [5, 10, 15]
+max_depth_vals = [5, 10, 15, 20]
 
 
 

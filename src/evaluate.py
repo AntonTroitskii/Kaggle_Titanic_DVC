@@ -64,8 +64,8 @@ def evaluate(config_path: Text):
     sgk = StratifiedShuffleSplit(
         n_splits=params['evaluate']['n_split'],
         random_state=params['evaluate']['seed'])
-    cvs_train = cross_val_score(model, X_train, y_train, cv=sgk, n_jobs=-1)
-    # cvs_train = cross_val_score(model, X_train, y_train, cv=5, n_jobs=-1)
+    # cvs_train = cross_val_score(model, X_train, y_train, cv=sgk, n_jobs=-1)
+    cvs_train = cross_val_score(model, X_train, y_train, cv=5, n_jobs=-1)
 
 # save test actual and predicted
     df = pd.DataFrame({'actual': y_test, 'predict': y_pred})

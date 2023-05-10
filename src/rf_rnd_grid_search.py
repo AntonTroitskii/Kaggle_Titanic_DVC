@@ -3,14 +3,14 @@ import subprocess
 import random
 
 random.seed(0)
-num_exp = 30
+num_exp = 100
 
 for _ in range(num_exp):
     
     params = {
-        'n_estim_val': random.randint(50, 500),
+        'n_estim_val': random.randint(50, 2000),
         'crit_val': random.choice(['gini', 'entropy']),
-        'max_depth_val': random.randint(2, 15)
+        'max_depth_val': random.randint(2, 30)
     }
     
 
