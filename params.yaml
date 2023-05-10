@@ -25,9 +25,18 @@ data:
   sub_name: gender_submission.csv
 
 featurize:
-  used_cols: [Age, Fare, Sex, Pclass, Embarked]
-  cat_cols: [Sex, Embarked]
-  num_cols: [Age, Fare]
+  used_cols:
+  - Age
+  - Fare
+  - Sex
+  - Pclass
+  - Embarked
+  cat_cols:
+  - Sex
+  - Embarked
+  num_cols:
+  - Age
+  - Fare
 
 prepare:
   split: 0.2
@@ -35,9 +44,9 @@ prepare:
 train:
   model_dir: models
   model: model.pkl
-  n_estim: 100
+  n_estim: 472
   crit: gini
-  max_d: 1000
+  max_d: 11
   min_s_s: 2
   min_s_l: 1
   n_j: -1

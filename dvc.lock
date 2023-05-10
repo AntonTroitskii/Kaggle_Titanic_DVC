@@ -7,8 +7,8 @@ stages:
       md5: 10f742b24e336c6671dda8bdaa5580a6
       size: 34877
     - path: params.yaml
-      md5: 80bdb23a4083fb9b3c5df3b08df39bce
-      size: 1051
+      md5: 64d510acdcc52da2bf36599f66cff3f9
+      size: 1082
     - path: src/prepare.py
       md5: 75fe54cce0f40c4de8c7e95fe53b3871
       size: 2033
@@ -25,8 +25,8 @@ stages:
       size: 91455
       nfiles: 3
     - path: params.yaml
-      md5: 80bdb23a4083fb9b3c5df3b08df39bce
-      size: 1051
+      md5: 64d510acdcc52da2bf36599f66cff3f9
+      size: 1082
     - path: src/featurize.py
       md5: 5a0a653a30c6fe65d47604ae9c4e3881
       size: 3957
@@ -43,8 +43,8 @@ stages:
       size: 93317
       nfiles: 3
     - path: params.yaml
-      md5: 80bdb23a4083fb9b3c5df3b08df39bce
-      size: 1051
+      md5: 64d510acdcc52da2bf36599f66cff3f9
+      size: 1082
     - path: src/featurize.py
       md5: 5a0a653a30c6fe65d47604ae9c4e3881
       size: 3957
@@ -53,17 +53,17 @@ stages:
       size: 1331
     params:
       params.yaml:
-        train.n_estim: 100
+        train.n_estim: 472
     outs:
     - path: models/model.pkl
-      md5: 05877e2d2158dc2caf794d6a033fc915
-      size: 2032133
+      md5: 9567736785fbd9995f7a85a29e6b8996
+      size: 7871239
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: models/model.pkl
-      md5: 05877e2d2158dc2caf794d6a033fc915
-      size: 2032133
+      md5: 9567736785fbd9995f7a85a29e6b8996
+      size: 7871239
     - path: src/evaluate.py
       md5: 8ab866e990dcffc73beb62ca23aa8506
       size: 3408
@@ -72,5 +72,5 @@ stages:
       size: 1331
     outs:
     - path: reports/scores.json
-      md5: 626703a9fd5b2230409eec5f4f5164ae
-      size: 164
+      md5: e822bc9cac33f8281e54b784993f99c5
+      size: 149
