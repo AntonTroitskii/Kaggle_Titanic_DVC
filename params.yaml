@@ -10,6 +10,8 @@ data:
   unzip_dir: data/unzip
   prepared_dir: data/prepared
   featurize_dir: data/featurized
+  predict_dir: predictions
+  uznip_dir: unzip
 
   # Files
   train_name: train.csv
@@ -19,17 +21,19 @@ data:
   prep_test_name: prep_test.cvs
   trainpkl: train.pkl
   testpkl: test.pkl
+  predpkl: pred.pkl
+  sub_name: gender_submission.csv
 
 
 prepare:
   split: 0.2
 
 train:
-  model_dir: models/
+  model_dir: models
   model: model.pkl
-  n_estim: 451
+  n_estim: 316
   crit: entropy
-  max_d: 9
+  max_d: 2
   min_s_s: 2
   min_s_l: 1
   n_j: -1
@@ -45,8 +49,6 @@ evaluate:
   classes: classes.csv
   cvs: cross_val_score.csv
   cvs_mean: cross_val_score_mean.csv
-
-
 
 
 

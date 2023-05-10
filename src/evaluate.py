@@ -11,25 +11,23 @@ from sklearn.metrics import precision_recall_curve, auc, accuracy_score
 from sklearn.model_selection import cross_val_score, StratifiedShuffleSplit
 from typing import Text
 
-
 from utils import pars, files
 
 
 def evaluate(config_path: Text):
-
+    
     with open(config_path) as config_file:
         params = yaml.safe_load(config_file)
 
-    model_path = Path(params['train']['model_dir']) / params['train']['model']
+# pathes of files
     features_dir = Path(params['data']['featurize_dir'])
-
-    # pathes of files
     reports_dir = Path(params['evaluate']['reports_dir'])
     scores_path = reports_dir / params['evaluate']['scores']
     importance_path = reports_dir / params['evaluate']['importance']
     classes_path = reports_dir / params['evaluate']['classes']
     cvs_path = reports_dir / params['evaluate']['cvs']
     cvs_mean_path = reports_dir / params['evaluate']['cvs_mean']
+    model_path = Path(params['train']['model_dir']) / params['train']['model']
     plots_path = reports_dir / params['evaluate']['plots']
 
 # read test data
@@ -67,6 +65,7 @@ def evaluate(config_path: Text):
         n_splits=params['evaluate']['n_split'],
         random_state=params['evaluate']['seed'])
     cvs_train = cross_val_score(model, X_train, y_train, cv=sgk, n_jobs=-1)
+    # cvs_train = cross_val_score(model, X_train, y_train, cv=5, n_jobs=-1)
 
 # save test actual and predicted
     df = pd.DataFrame({'actual': y_test, 'predict': y_pred})
