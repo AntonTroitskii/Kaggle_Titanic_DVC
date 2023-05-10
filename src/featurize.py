@@ -34,36 +34,43 @@ def get_X_y(path: Path, params):
     else:
         X = df
         y = None
-        
+
     return X, y
 
 
-pipe_age = make_pipeline(SimpleImputer(
-    missing_values=pd.NA, strategy='median'), StandardScaler())
-pipe_cat = make_pipeline(OneHotEncoder(handle_unknown='ignore'))
-pipe_cat_nan = make_pipeline(SimpleImputer(missing_values=pd.NA, strategy='most_frequent'), OneHotEncoder(handle_unknown='ignore'))
+def get_columns_tranformer(params):
 
+    cat_cols = params['featurize']['cat_cols']
+    num_cols = params['featurize']['num_cols']
 
-pipe_transfrom = ColumnTransformer(
-    [('num', pipe_age, ['Age', 'Fare']),
-     ('cat', pipe_cat, ['Sex']),
-     ('can_nan', pipe_cat_nan, ['Embarked'])
-     ]
-)
+    pipe_num_meidan = make_pipeline(SimpleImputer(
+        missing_values=pd.NA, strategy='median'), StandardScaler())
+    pipe_cat = make_pipeline(OneHotEncoder(handle_unknown='ignore'))
+    pipe_cat_nan = make_pipeline(SimpleImputer(
+        missing_values=pd.NA, strategy='most_frequent'), OneHotEncoder(handle_unknown='ignore'))
+
+    pipe_transfrom = ColumnTransformer([('num', pipe_num_meidan, num_cols),
+                                        ('cat', pipe_cat, cat_cols)],
+                                       remainder='passthrough'
+                                       )
+
+    return pipe_transfrom
+
 
 # embarked deleted because it's not sugnificant as Age, Fare and Sex
 
 
-def transfrom_X(X: pd.DataFrame) -> pd.DataFrame:
-    X_tr = pipe_transfrom.fit_transform(X)
+def transfrom_X(X: pd.DataFrame, pipe_tr, params) -> pd.DataFrame:
+    used_columns = params['featurize']['used_cols']
+    X_tr = pipe_tr.fit_transform(X[used_columns])
     if isinstance(X_tr, np.ndarray):
         df_X_tr = pd.DataFrame(
-            data=X_tr, columns=pipe_transfrom.get_feature_names_out())
+            data=X_tr, columns=pipe_tr.get_feature_names_out())
         return df_X_tr
     elif isinstance(X_tr, scipy.sparse.csr_matrix):
         X_tr = X_tr.toarray()
         df_X_tr = pd.DataFrame(
-            data=X_tr, columns=pipe_transfrom.get_feature_names_out())
+            data=X_tr, columns=pipe_tr.get_feature_names_out())
         return df_X_tr
     else:
         return None
@@ -74,7 +81,7 @@ def append_label_save_pkl(X, y, feature_dir, filename):
         output = pd.concat([X, y], axis=1)
     else:
         output = X
-        
+
     fpath = feature_dir / filename
     with open(fpath, 'wb') as f:
         pickle.dump(output, f)
@@ -96,18 +103,22 @@ def featurize(config_path: Text) -> None:
 
     X_train, y_train = get_X_y(train_path, params)
     X_test, y_test = get_X_y(test_path, params)
-    X_pred, y_pred = get_X_y(pred_path, params) # read data fro prediction y
+    X_pred, y_pred = get_X_y(pred_path, params)  # read data fro prediction y
 
-    X_train_tr = transfrom_X(X_train)
-    X_test_tr = transfrom_X(X_test)
-    X_pred_tr = transfrom_X(X_pred)
+    pipe_tr = get_columns_tranformer(params)
 
-    append_label_save_pkl(X_train_tr, y_train, featurize_dir,  params['data']['trainpkl'])
-    append_label_save_pkl(X_test_tr, y_test, featurize_dir, params['data']['testpkl'])
-    
+    X_train_tr = transfrom_X(X_train, pipe_tr, params)
+    X_test_tr = transfrom_X(X_test, pipe_tr, params)
+    X_pred_tr = transfrom_X(X_pred, pipe_tr, params)
+
+    append_label_save_pkl(X_train_tr, y_train,
+                          featurize_dir,  params['data']['trainpkl'])
+    append_label_save_pkl(X_test_tr, y_test, featurize_dir,
+                          params['data']['testpkl'])
+
     # write data for prediction y_pred = None
-    append_label_save_pkl(X_pred_tr, y_pred, featurize_dir, params['data']['predpkl'])
-    
+    append_label_save_pkl(X_pred_tr, y_pred, featurize_dir,
+                          params['data']['predpkl'])
 
 
 if __name__ == '__main__':

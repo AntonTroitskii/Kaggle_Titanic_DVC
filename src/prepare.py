@@ -40,7 +40,12 @@ def prepare_data(config_path: Text) -> None:
 
     # prepare train test data
     df = pd.read_csv(unzip_dir / params['data']['train_name'])
-    y = df[[params['base']['target']]]
+    
+    # mamke some droping
+    # drop Embarked
+    df = df[df['Embarked'].notna()]
+    # print(df.shape)
+    y = df[[params['base']['target']]] # need for stratification
 
     X_train, X_test = train_test_split(df,
                                        test_size=params['prepare']['split'],

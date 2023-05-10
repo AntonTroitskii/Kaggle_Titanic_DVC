@@ -4,6 +4,7 @@ stages:
     deps:
     - src/prepare.py
     - data/init/titanic.zip
+    - params.yaml
     outs:
     - data/prepared:
         cache: false
@@ -12,6 +13,7 @@ stages:
     deps:
     - data/prepared
     - src/featurize.py
+    - params.yaml
     outs:
     - data/featurized:
         cache: false
@@ -21,6 +23,7 @@ stages:
     - data/featurized
     - src/featurize.py
     - src/train.py
+    - params.yaml
     outs:
     - models/model.pkl:
         cache: false
