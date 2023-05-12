@@ -31,22 +31,23 @@ featurize:
   - Sex
   - Pclass
   - Embarked
+  - SibSp
+  - Parch
   cat_cols:
   - Sex
   - Embarked
   num_cols:
   - Age
   - Fare
-
 prepare:
   split: 0.2
 
 train:
   model_dir: models
   model: model.pkl
-  n_estim: 472
-  crit: gini
-  max_d: 11
+  n_estim: 1396
+  crit: entropy
+  max_d: 6
   min_s_s: 2
   min_s_l: 1
   n_j: -1

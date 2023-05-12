@@ -44,6 +44,9 @@ def prepare_data(config_path: Text) -> None:
     # mamke some droping
     # drop Embarked
     df = df[df['Embarked'].notna()]
+    # drop Age
+    df = df[df['Age'].notna()]
+    
     # print(df.shape)
     y = df[[params['base']['target']]] # need for stratification
 

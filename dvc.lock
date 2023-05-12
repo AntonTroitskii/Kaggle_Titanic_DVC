@@ -7,44 +7,44 @@ stages:
       md5: 10f742b24e336c6671dda8bdaa5580a6
       size: 34877
     - path: params.yaml
-      md5: 64d510acdcc52da2bf36599f66cff3f9
-      size: 1082
+      md5: ba142f15b48ea12b6f1edc1cd7d3fd80
+      size: 1105
     - path: src/prepare.py
-      md5: 75fe54cce0f40c4de8c7e95fe53b3871
-      size: 2033
+      md5: 2993fb71f60b27840454381e942f54b7
+      size: 2087
     outs:
     - path: data/prepared
-      md5: e4de15a1f9fed0385ee490bac9479601.dir
-      size: 91455
+      md5: 15bd42ef203c988a19133b86c8b874b0.dir
+      size: 80207
       nfiles: 3
   featurize:
     cmd: python src/featurize.py --config=params.yaml
     deps:
     - path: data/prepared
-      md5: e4de15a1f9fed0385ee490bac9479601.dir
-      size: 91455
+      md5: 15bd42ef203c988a19133b86c8b874b0.dir
+      size: 80207
       nfiles: 3
     - path: params.yaml
-      md5: 64d510acdcc52da2bf36599f66cff3f9
-      size: 1082
+      md5: ba142f15b48ea12b6f1edc1cd7d3fd80
+      size: 1105
     - path: src/featurize.py
       md5: 5a0a653a30c6fe65d47604ae9c4e3881
       size: 3957
     outs:
     - path: data/featurized
-      md5: 5e96984d3263494b5e576118ea0d51f8.dir
-      size: 93317
+      md5: 03bf8903d83973a68508d7811877ca4b.dir
+      size: 98767
       nfiles: 3
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
     - path: data/featurized
-      md5: 5e96984d3263494b5e576118ea0d51f8.dir
-      size: 93317
+      md5: 03bf8903d83973a68508d7811877ca4b.dir
+      size: 98767
       nfiles: 3
     - path: params.yaml
-      md5: 64d510acdcc52da2bf36599f66cff3f9
-      size: 1082
+      md5: ba142f15b48ea12b6f1edc1cd7d3fd80
+      size: 1105
     - path: src/featurize.py
       md5: 5a0a653a30c6fe65d47604ae9c4e3881
       size: 3957
@@ -53,24 +53,24 @@ stages:
       size: 1331
     params:
       params.yaml:
-        train.n_estim: 472
+        train.n_estim: 1396
     outs:
     - path: models/model.pkl
-      md5: 9567736785fbd9995f7a85a29e6b8996
-      size: 7871239
+      md5: 1c9bab2f6b0cb7ebb1e885cea8e2e854
+      size: 7067639
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: models/model.pkl
-      md5: 9567736785fbd9995f7a85a29e6b8996
-      size: 7871239
+      md5: 1c9bab2f6b0cb7ebb1e885cea8e2e854
+      size: 7067639
     - path: src/evaluate.py
-      md5: 8ab866e990dcffc73beb62ca23aa8506
+      md5: a83b2c5fc583bfc80c753ec446982f3d
       size: 3408
     - path: src/train.py
       md5: 52b5c6dffa9571eb76fe8f8b3cf3024f
       size: 1331
     outs:
     - path: reports/scores.json
-      md5: e822bc9cac33f8281e54b784993f99c5
-      size: 149
+      md5: 28579cf1794be10c51c4bb4d17bdfdb3
+      size: 164
